@@ -1,4 +1,4 @@
-package common;
+﻿package common;
 
 public class Constants {
 	public static final boolean DEBUG_FLAG = true;

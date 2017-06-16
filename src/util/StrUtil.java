@@ -1,11 +1,11 @@
-package utils;
+package util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 瀛楃涓插伐鍏风被
+ * 字符串工具类
  *
  * @author xiaoleilu
  */
@@ -16,36 +16,36 @@ public class StrUtil {
     public static final String EMPTY = "";
 
     /**
-     * 瀛楃涓叉槸鍚︿负绌虹櫧 绌虹櫧鐨勫畾涔夊涓嬶細 <br>
-     * 1銆佷负null <br>
-     * 2銆佷负涓嶅彲瑙佸瓧绗︼紙濡傜┖鏍硷級<br>
-     * 3銆�""<br>
+     * 字符串是否为空白 空白的定义如下：
+     * 1、为null
+     * 2、为不可见字符（如空格）
+     * 3�?""
      *
-     * @param str 琚娴嬬殑瀛楃涓�
-     * @return 鏄惁涓虹┖
+     * @param str 被检测的字符�?
+     * @return 是否为空
      */
     public static boolean isBlank(String str) {
         return str == null || str.trim().length() == 0;
     }
 
     /**
-     * 瀛楃涓叉槸鍚︿负绌猴紝绌虹殑瀹氫箟濡備笅
-     * 1銆佷负null <br>
-     * 2銆佷负""<br>
+     * 字符串是否为空，空的定义如下
+     * 1、为null
+     * 2、为""
      *
-     * @param str 琚娴嬬殑瀛楃涓�
-     * @return 鏄惁涓虹┖
+     * @param str 被检测的字符�?
+     * @return 是否为空
      */
     public static boolean isEmpty(String str) {
         return str == null || str.length() == 0;
     }
 
     /**
-     * 鑾峰緱set鎴杇et鏂规硶瀵瑰簲鐨勬爣鍑嗗睘鎬у悕<br/>
-     * 渚嬪锛歴etName 杩斿洖 name
+     * 获得set或get方法对应的标准属性名
+     * 例如：setName 返回 name
      *
-     * @param getOrSetMethodName
-     * @return 濡傛灉鏄痵et鎴杇et鏂规硶鍚嶏紝杩斿洖field锛� 鍚﹀垯null
+     * @param getOrSetMethodName set或get方法�?
+     * @return 如果是set或get方法名，返回field�? 否则null
      */
     public static String getGeneralField(String getOrSetMethodName) {
         if (getOrSetMethodName.startsWith("get") || getOrSetMethodName.startsWith("set")) {
@@ -55,10 +55,10 @@ public class StrUtil {
     }
 
     /**
-     * 鐢熸垚set鏂规硶鍚�<br/>
-     * 渚嬪锛歯ame 杩斿洖 setName
+     * 生成set方法�?
+     * 例如：name 返回 setName
      *
-     * @param fieldName 灞炴�у悕
+     * @param fieldName 属�?�名
      * @return setXxx
      */
     public static String genSetter(String fieldName) {
@@ -66,9 +66,9 @@ public class StrUtil {
     }
 
     /**
-     * 鐢熸垚get鏂规硶鍚�
+     * 生成get方法�?
      *
-     * @param fieldName 灞炴�у悕
+     * @param fieldName 属�?�名
      * @return getXxx
      */
     public static String genGetter(String fieldName) {
@@ -76,12 +76,12 @@ public class StrUtil {
     }
 
     /**
-     * 鍘绘帀棣栭儴鎸囧畾闀垮害鐨勫瓧绗︿覆骞跺皢鍓╀綑瀛楃涓查瀛楁瘝灏忓啓<br/>
-     * 渚嬪锛歴tr=setName, preLength=3 -> return name
+     * 去掉首部指定长度的字符串并将剩余字符串首字母小写
+     * 例如：str=setName, preLength=3 -> return name
      *
-     * @param str       琚鐞嗙殑瀛楃涓�
-     * @param preLength 鍘绘帀鐨勯暱搴�
-     * @return 澶勭悊鍚庣殑瀛楃涓诧紝涓嶇鍚堣鑼冭繑鍥瀗ull
+     * @param str       被处理的字符�?
+     * @param preLength 去掉的长�?
+     * @return 处理后的字符串，不符合规范返回null
      */
     public static String cutPreAndLowerFirst(String str, int preLength) {
         if (str == null) {
@@ -98,12 +98,12 @@ public class StrUtil {
     }
 
     /**
-     * 鍘熷瓧绗︿覆棣栧瓧姣嶅ぇ鍐欏苟鍦ㄥ叾棣栭儴娣诲姞鎸囧畾瀛楃涓�
-     * 渚嬪锛歴tr=name, preString=get -> return getName
+     * 原字符串首字母大写并在其首部添加指定字符�?
+     * 例如：str=name, preString=get -> return getName
      *
-     * @param str       琚鐞嗙殑瀛楃涓�
-     * @param preString 娣诲姞鐨勯閮�
-     * @return 澶勭悊鍚庣殑瀛楃涓�
+     * @param str       被处理的字符�?
+     * @param preString 添加的首�?
+     * @return 处理后的字符�?
      */
     public static String upperFirstAndAddPre(String str, String preString) {
         if (str == null || preString == null) {
@@ -113,10 +113,10 @@ public class StrUtil {
     }
 
     /**
-     * 澶у啓棣栧瓧姣�<br>
-     * 渚嬪锛歴tr = name, return Name
+     * 大写首字�?
+     * 例如：str = name, return Name
      *
-     * @param str 瀛楃涓�
+     * @param str 字符�?
      * @return
      */
     public static String upperFirst(String str) {
@@ -124,10 +124,10 @@ public class StrUtil {
     }
 
     /**
-     * 灏忓啓棣栧瓧姣�<br>
-     * 渚嬪锛歴tr = Name, return name
+     * 小写首字�?
+     * 例如：str = Name, return name
      *
-     * @param str 瀛楃涓�
+     * @param str 字符�?
      * @return
      */
     public static String lowerFirst(String str) {
@@ -135,11 +135,11 @@ public class StrUtil {
     }
 
     /**
-     * 鍘绘帀鎸囧畾鍓嶇紑
+     * 去掉指定前缀
      *
-     * @param str    瀛楃涓�
-     * @param prefix 鍓嶇紑
-     * @return 鍒囨帀鍚庣殑瀛楃涓诧紝鑻ュ墠缂�涓嶆槸 preffix锛� 杩斿洖鍘熷瓧绗︿覆
+     * @param str    字符�?
+     * @param prefix 前缀
+     * @return 切掉后的字符串，若前�?不是 prefix�? 返回原字符串
      */
     public static String removePrefix(String str, String prefix) {
         if (str != null && str.startsWith(prefix)) {
@@ -149,11 +149,11 @@ public class StrUtil {
     }
 
     /**
-     * 蹇界暐澶у皬鍐欏幓鎺夋寚瀹氬墠缂�
+     * 忽略大小写去掉指定前�?
      *
-     * @param str    瀛楃涓�
-     * @param prefix 鍓嶇紑
-     * @return 鍒囨帀鍚庣殑瀛楃涓诧紝鑻ュ墠缂�涓嶆槸 prefix锛� 杩斿洖鍘熷瓧绗︿覆
+     * @param str    字符�?
+     * @param prefix 前缀
+     * @return 切掉后的字符串，若前�?不是 prefix�? 返回原字符串
      */
     public static String removePrefixIgnoreCase(String str, String prefix) {
         if (str != null && str.toLowerCase().startsWith(prefix.toLowerCase())) {
@@ -163,11 +163,11 @@ public class StrUtil {
     }
 
     /**
-     * 鍘绘帀鎸囧畾鍚庣紑
+     * 去掉指定后缀
      *
-     * @param str    瀛楃涓�
-     * @param suffix 鍚庣紑
-     * @return 鍒囨帀鍚庣殑瀛楃涓诧紝鑻ュ悗缂�涓嶆槸 suffix锛� 杩斿洖鍘熷瓧绗︿覆
+     * @param str    字符�?
+     * @param suffix 后缀
+     * @return 切掉后的字符串，若后�?不是 suffix�? 返回原字符串
      */
     public static String removeSuffix(String str, String suffix) {
         if (str != null && str.endsWith(suffix)) {
@@ -177,11 +177,11 @@ public class StrUtil {
     }
 
     /**
-     * 蹇界暐澶у皬鍐欏幓鎺夋寚瀹氬悗缂�
+     * 忽略大小写去掉指定后�?
      *
-     * @param str    瀛楃涓�
-     * @param suffix 鍚庣紑
-     * @return 鍒囨帀鍚庣殑瀛楃涓诧紝鑻ュ悗缂�涓嶆槸 suffix锛� 杩斿洖鍘熷瓧绗︿覆
+     * @param str    字符�?
+     * @param suffix 后缀
+     * @return 切掉后的字符串，若后�?不是 suffix�? 返回原字符串
      */
     public static String removeSuffixIgnoreCase(String str, String suffix) {
         if (str != null && str.toLowerCase().endsWith(suffix.toLowerCase())) {
@@ -191,28 +191,28 @@ public class StrUtil {
     }
 
     /**
-     * 鍒囧垎瀛楃涓�<br/>
+     * 切分字符�?
      * a#b#c -> [a,b,c]
      * a##b#c -> [a,"",b,c]
      *
-     * @param str       琚垏鍒嗙殑瀛楃涓�
-     * @param separator 鍒嗛殧绗﹀瓧绗�
-     * @return 鍒囧垎鍚庣殑闆嗗悎
+     * @param str       被切分的字符�?
+     * @param separator 分隔符字�?
+     * @return 切分后的集合
      */
     public static List<String> split(String str, char separator) {
         return split(str, separator, 0);
     }
 
     /**
-     * 鍒囧垎瀛楃涓�
+     * 切分字符�?
      *
-     * @param str       琚垏鍒嗙殑瀛楃涓�
-     * @param separator 鍒嗛殧绗﹀瓧绗�
-     * @param limit     闄愬埗鍒嗙墖鏁�
-     * @return 鍒囧垎鍚庣殑闆嗗悎
+     * @param str       被切分的字符�?
+     * @param separator 分隔符字�?
+     * @param limit     限制分片�?
+     * @return 切分后的集合
      */
     public static List<String> split(String str, char separator, int limit) {
-        if (str == null) {
+    	if (str == null) {
             return null;
         }
         List<String> list = new ArrayList<String>(limit == 0 ? 16 : limit);
@@ -221,17 +221,17 @@ public class StrUtil {
             return list;
         }
 
-        boolean isNotEnd = true;    //鏈粨鏉熷垏鍒嗙殑鏍囧織
+        boolean isNotEnd = true;    //未结束切分的标志
         int strLen = str.length();
         StringBuilder sb = new StringBuilder(strLen);
         for (int i = 0; i < strLen; i++) {
             char c = str.charAt(i);
             if (isNotEnd && c == separator) {
                 list.add(sb.toString());
-                //娓呯┖StringBuilder
+                //清空StringBuilder
                 sb.delete(0, sb.length());
 
-                //褰撹揪鍒板垏鍒嗕笂闄�-1鐨勯噺鏃讹紝灏嗘墍鍓╁瓧绗﹀叏閮ㄤ綔涓烘渶鍚庝竴涓覆
+                //当达到切分上�?-1的量时，将所剩字符全部作为最后一个串
                 if (limit != 0 && list.size() == limit - 1) {
                     isNotEnd = false;
                 }
@@ -244,11 +244,11 @@ public class StrUtil {
     }
 
     /**
-     * 鍒囧垎瀛楃涓�<br>
+     * 切分字符�?
      * from jodd
      *
-     * @param str       琚垏鍒嗙殑瀛楃涓�
-     * @param delimiter 鍒嗛殧绗�
+     * @param str       被切分的字符�?
+     * @param delimiter 分隔�?
      * @return
      */
     public static String[] split(String str, String delimiter) {
@@ -283,11 +283,11 @@ public class StrUtil {
     }
 
     /**
-     * 閲嶅鏌愪釜瀛楃
+     * 重复某个字符
      *
-     * @param c     琚噸澶嶇殑瀛楃
-     * @param count 閲嶅鐨勬暟鐩�
-     * @return 閲嶅瀛楃瀛楃涓�
+     * @param c     被重复的字符
+     * @param count 重复的数�?
+     * @return 重复字符字符�?
      */
     public static String repeat(char c, int count) {
         char[] result = new char[count];
@@ -298,13 +298,13 @@ public class StrUtil {
     }
 
     /**
-     * 缁欏畾瀛楃涓茶浆鎹㈠瓧绗︾紪鐮�<br/>
-     * 濡傛灉鍙傛暟涓虹┖锛屽垯杩斿洖鍘熷瓧绗︿覆锛屼笉鎶ラ敊銆�
+     * 给定字符串转换字符编�?
+     * 如果参数为空，则返回原字符串，不报错�?
      *
-     * @param str           琚浆鐮佺殑瀛楃涓�
-     * @param sourceCharset 鍘熷瓧绗﹂泦
-     * @param destCharset   鐩爣瀛楃闆�
-     * @return 杞崲鍚庣殑瀛楃涓�
+     * @param str           被转码的字符�?
+     * @param sourceCharset 原字符集
+     * @param destCharset   目标字符�?
+     * @return 转换后的字符�?
      */
     public static String convertCharset(String str, String sourceCharset, String destCharset) {
         if (isBlank(str) || isBlank(sourceCharset) || isBlank(destCharset)) {
@@ -318,11 +318,11 @@ public class StrUtil {
     }
 
     /**
-     * 姣旇緝涓や釜瀛楃涓叉槸鍚︾浉鍚岋紝濡傛灉涓簄ull鎴栬�呯┖涓插垯绠椾笉鍚�
+     * 比较两个字符串是否相同，如果为null或�?�空串则算不�?
      *
-     * @param str1 瀛楃涓�1
-     * @param str2 瀛楃涓�2
-     * @return 鏄惁闈炵┖鐩稿悓
+     * @param str1 字符�?1
+     * @param str2 字符�?2
+     * @return 是否非空相同
      */
     public static boolean equalsNotEmpty(String str1, String str2) {
         if (isEmpty(str1)) {
@@ -332,22 +332,22 @@ public class StrUtil {
     }
 
     /**
-     * 鏍煎紡鍖栨枃鏈�
+     * 格式化文�?
      *
-     * @param template 鏂囨湰妯℃澘锛岃鏇挎崲鐨勯儴鍒嗙敤 {} 琛ㄧず
-     * @param values   鍙傛暟鍊�
-     * @return 鏍煎紡鍖栧悗鐨勬枃鏈�
+     * @param template 文本模板，被替换的部分用 {} 表示
+     * @param values   参数�?
+     * @return 格式化后的文�?
      */
     public static String format(String template, Object... values) {
         return String.format(template.replace("{}", "%s"), values);
     }
 
     /**
-     * 杩炴帴瀛楃涓�
+     * 连接字符�?
      *
-     * @param items     寰呰繛鎺ョ殑瀛楃涓叉暟缁�
-     * @param separator 鍒嗛殧瀛楃涓�
-     * @return 鏍煎紡鍖栧悗鐨勬枃鏈�
+     * @param items     待连接的字符串数�?
+     * @param separator 分隔字符�?
+     * @return 格式化后的文�?
      */
     public static String join(String[] items, String separator) {
         StringBuffer sb = new StringBuffer();
@@ -361,11 +361,11 @@ public class StrUtil {
 
 
     /**
-     * 杩炴帴瀛楃涓�
+     * 连接字符�?
      *
-     * @param items     寰呰繛鎺ョ殑瀛楃涓插垪琛�
-     * @param separator 鍒嗛殧瀛楃涓�
-     * @return 鏍煎紡鍖栧悗鐨勬枃鏈�
+     * @param items     待连接的字符串列�?
+     * @param separator 分隔字符�?
+     * @return 格式化后的文�?
      */
     public static String join(List<String> items, String separator) {
         StringBuffer sb = new StringBuffer();

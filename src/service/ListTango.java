@@ -1,4 +1,4 @@
-package service;
+ï»¿package service;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -15,7 +15,7 @@ import org.codehaus.jettison.json.JSONObject;
 
 import bean.Tango;
 import common.Constants;
-import utils.StrUtil;
+import util.StrUtil;
 
 /**
  * Servlet implementation class ListTango
@@ -35,23 +35,23 @@ public class ListTango extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");   //ÉèÖÃÎÄ±¾ĞÎÊ½ºÍ×Ö·û±àÂë
+		response.setContentType("text/html");   //è®¾ç½®æ–‡æœ¬å½¢å¼å’Œå­—ç¬¦ç¼–ç 
 		response.setCharacterEncoding("UTF-8");
 		Writer out=response.getWriter();  
 
 		try {
 			JSONObject res = new JSONObject();
 			res.put(Constants.RESPONSE_STATUS, Constants.STATUS_QUERY_SUCCESS);
-			res.put(Constants.RESPONSE_PROMPT, "»ñÈ¡³É¹¦");
+			res.put(Constants.RESPONSE_PROMPT, "è·å–æˆåŠŸ");
 			JSONArray entityList = new JSONArray();
 			
 			Tango tango = new Tango();
 			tango.id = -2;
-			tango.writing = "´óÇĞ";
-			tango.pronunciation = "¤¿¤¤¤»¤Ä";
+			tango.writing = "å¤§åˆ‡";
+			tango.pronunciation = "ãŸã„ã›ã¤";
 			tango.tone = 0;
-			tango.meaning = "ÖØÒª,Õä¹ó";
-			tango.partOfSpeech = "ĞÎÈİ¶¯´Ê";
+			tango.meaning = "é‡è¦,çè´µ";
+			tango.partOfSpeech = "å½¢å®¹åŠ¨è¯";
 			
 			String strings[] = new String[]{
                     tango.writing, //0
@@ -79,7 +79,7 @@ public class ListTango extends HttpServlet {
 			try {
 				JSONObject res = new JSONObject();
 				res.put(Constants.RESPONSE_STATUS, 0);
-				res.put(Constants.RESPONSE_PROMPT, "»ñÈ¡Ê§°Ü");
+				res.put(Constants.RESPONSE_PROMPT, "è·å–å¤±è´¥");
 				out.append(res.toString());
 			} catch (JSONException ex) {
 				ex.printStackTrace();

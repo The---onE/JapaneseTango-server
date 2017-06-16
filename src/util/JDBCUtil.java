@@ -1,4 +1,4 @@
-package utils;
+﻿package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,19 +9,19 @@ import java.sql.SQLException;
 import common.Constants;
 
 public class JDBCUtil {
-	private String jdbcDriver = "com.mysql.jdbc.Driver";
+	private String jdbcDriver = "com.mysql.jdbc.Driver"; // 数据库驱动程序
 	private String strCon = Constants.MYSQL_URL + Constants.DATABASE_NAME;
 	private String username = Constants.MYSQL_USERNAME;
 	private String password = Constants.MYSQL_PASSWORD;
+
+	private static JDBCUtil util = null;// 静态成员变量，支持单态模式
 
 	private static Connection conn = null;
 	private PreparedStatement pstm = null;
 	private ResultSet rs = null;
 
-
-	private static JDBCUtil util = null;
 	/**
-	 * ��ȡJDBCUtil����
+	 * 获取JDBCUtil单例
 	 * 
 	 * @return
 	 * @throws ClassNotFoundException
@@ -35,25 +35,24 @@ public class JDBCUtil {
 	}
 
 	public void initDB() throws ClassNotFoundException {
-		// 1����������
+		// 1、加载驱动
 		Class.forName(jdbcDriver);
 	}
 
 	/**
-	 * �������ݿ�
+	 * 连接数据库
 	 * 
 	 * @throws SQLException
 	 */
-	public boolean connectDB() throws SQLException {
+	public void connectDB() throws SQLException {
 		conn = DriverManager.getConnection(strCon, username, password);
 		if (Constants.DEBUG_FLAG) {
-			System.out.println(conn != null ? "���ӳɹ�" : "����ʧ��");
+			System.out.println(conn != null ? "连接成功" : "连接失败");
 		}
-		return conn != null;
 	}
 
 	/**
-	 * ��������
+	 * 开启事务
 	 * 
 	 * @throws SQLException
 	 */
@@ -63,7 +62,7 @@ public class JDBCUtil {
 	}
 
 	/**
-	 * �ع�����
+	 * 回滚事务
 	 * 
 	 * @throws SQLException
 	 */
@@ -72,7 +71,7 @@ public class JDBCUtil {
 	}
 
 	/**
-	 * �ύ����
+	 * 提交事务
 	 * 
 	 * @throws SQLException
 	 */
@@ -81,7 +80,7 @@ public class JDBCUtil {
 	}
 
 	/**
-	 * �ر�����
+	 * 关闭连接
 	 * 
 	 * @throws SQLException
 	 */
@@ -99,7 +98,7 @@ public class JDBCUtil {
 	}
 
 	/**
-	 * ����PrepareStatement�����е�Sql���Ĳ���
+	 * 设置PrepareStatement对象中的Sql语句的参数
 	 * 
 	 * @throws SQLException
 	 */
@@ -115,36 +114,36 @@ public class JDBCUtil {
 	}
 
 	/**
-	 * ִ�в�ѯ
+	 * 执行查询
 	 * 
 	 * @param sql
-	 *            sql���
+	 *            sql语句
 	 * @param params
-	 *            �����б�
-	 * @return ����ResultSet���͵Ĳ�ѯ���
+	 *            参数列表
+	 * @return 返回ResultSet类型的查询结果
 	 * @throws SQLException
 	 */
 	public ResultSet executeQuery(String sql, Object[] params)
-			throws SQLException { // ִ�в�ѯ���ݿ�ӿ�
+			throws SQLException { // 执行查询数据库接口
 
-		util.setPrepareStatementParams(sql, params); // ������
-		rs = pstm.executeQuery(); // ִ�в�ѯ����
+		util.setPrepareStatementParams(sql, params); // 填充参数
+		rs = pstm.executeQuery(); // 执行查询操作
 		return rs;
 	}
 
 	/**
-	 * ִ�����ݵ���ɾ��
+	 * 执行数据的增删改
 	 * 
 	 * @param sql
 	 * @param params
 	 * @return
 	 * @throws SQLException
 	 */
-	public int executeUpdate(String sql, Object[] params) throws SQLException // ִ���޷������ݵ����ݲ�ѯ������ֵ�Ǳ��ı���������ݿ�����
+	public int executeUpdate(String sql, Object[] params) throws SQLException // 执行无返回数据的数据查询，返回值是被改变的书库的数据库项数
 	{
 		int result = -1;
-		util.setPrepareStatementParams(sql, params); // ������
-		pstm.executeUpdate(); // ִ�и���
+		util.setPrepareStatementParams(sql, params); // 填充参数
+		pstm.executeUpdate(); // 执行更新
 		result = 1;
 		return result;
 	}
