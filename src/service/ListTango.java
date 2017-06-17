@@ -2,6 +2,8 @@
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,32 +47,45 @@ public class ListTango extends HttpServlet {
 			res.put(Constants.RESPONSE_PROMPT, "获取成功");
 			JSONArray entityList = new JSONArray();
 			
-			Tango tango = new Tango();
-			tango.id = -2;
-			tango.writing = "大切";
-			tango.pronunciation = "たいせつ";
-			tango.tone = 0;
-			tango.meaning = "重要,珍贵";
-			tango.partOfSpeech = "形容动词";
+			List<Tango> tangoList = new ArrayList<>();
 			
-			String strings[] = new String[]{
-                    tango.writing, //0
-                    tango.pronunciation, //1
-                    tango.meaning, //2
-                    String.valueOf(tango.tone), //3
-                    tango.partOfSpeech, //4
-                    tango.image, //5
-                    tango.voice, // 6
-                    String.valueOf(tango.score), //7
-                    String.valueOf(tango.frequency), //8
-                    String.valueOf(tango.addTime.getTime()), //9
-                    String.valueOf(tango.lastTime.getTime()), //10
-                    tango.flags, //11
-                    String.valueOf(tango.delFlag), //12
-                    tango.type //13
-            };
-			String item = StrUtil.join(strings, ",");
-			entityList.put(item);
+			Tango t1 = new Tango();
+			t1.id = -2;
+			t1.writing = "大切";
+			t1.pronunciation = "たいせつ";
+			t1.tone = 0;
+			t1.meaning = "重要,珍贵";
+			t1.partOfSpeech = "形容动词";
+			tangoList.add(t1);
+			
+			Tango t2 = new Tango();
+	        t2.id = -3;
+	        t2.writing = "ありがとうございます";
+	        t2.pronunciation = "ありがとうございます";
+	        t2.meaning = "谢谢";
+	        t2.partOfSpeech = "惯用语";
+	        tangoList.add(t2);
+			
+			for (Tango t : tangoList) {
+				String strings[] = new String[]{
+	                    t.writing, //0
+	                    t.pronunciation, //1
+	                    t.meaning, //2
+	                    String.valueOf(t.tone), //3
+	                    t.partOfSpeech, //4
+	                    t.image, //5
+	                    t.voice, // 6
+	                    String.valueOf(t.score), //7
+	                    String.valueOf(t.frequency), //8
+	                    String.valueOf(t.addTime.getTime()), //9
+	                    String.valueOf(t.lastTime.getTime()), //10
+	                    t.flags, //11
+	                    String.valueOf(t.delFlag), //12
+	                    t.type //13
+	            };
+				String item = StrUtil.join(strings, ",");
+				entityList.put(item);
+			}
 			
 			res.put(Constants.RESPONSE_ENTITIES, entityList);
 			out.append(res.toString());
