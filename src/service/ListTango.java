@@ -60,13 +60,7 @@ public class ListTango extends HttpServlet {
 					JSONArray entityList = new JSONArray();
 					List<Tango> tangoList = new ArrayList<>();
 					do {
-						Tango t = new Tango();
-						t.id = rs.getInt("id");
-						t.writing = rs.getString("writing");
-						t.pronunciation = rs.getString("pronunciation");
-						t.tone = rs.getInt("tone");
-						t.meaning = rs.getString("meaning");
-						t.partOfSpeech = rs.getString("part_of_speech");
+						Tango t = new Tango(rs);
 						tangoList.add(t);
 					} while (rs.next());
 
@@ -100,7 +94,6 @@ public class ListTango extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
-				JSONObject res = new JSONObject();
 				res.put(Constants.RESPONSE_STATUS, 0);
 				res.put(Constants.RESPONSE_PROMPT, "获取失败");
 				out.append(res.toString());

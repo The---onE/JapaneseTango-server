@@ -1,5 +1,7 @@
 ﻿package bean;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 /**
@@ -21,4 +23,13 @@ public class Tango {
     public String flags = "";
     public int delFlag = 0;
     public String type = "";
+    
+    public Tango(ResultSet rs) throws SQLException {
+    	id = rs.getInt("id");
+    	writing = rs.getString("writing");
+    	pronunciation = rs.getString("pronunciation");
+		tone = rs.getInt("tone");
+		meaning = rs.getString("meaning");
+		partOfSpeech = rs.getString("part_of_speech");
+    }
 }
