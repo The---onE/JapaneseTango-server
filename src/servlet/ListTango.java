@@ -1,4 +1,4 @@
-﻿package service;
+﻿package servlet;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -16,8 +16,8 @@ import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-import bean.Tango;
 import common.Constants;
+import entity.Tango;
 import util.JDBCUtil;
 import util.StrUtil;
 

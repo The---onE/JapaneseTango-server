@@ -1,10 +1,11 @@
-﻿package util;
+package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import common.Constants;
 
@@ -12,9 +13,7 @@ public class JDBCUtil {
 	private String jdbcDriver = "com.mysql.jdbc.Driver"; // 数据库驱动程序
 	private String strCon = Constants.MYSQL_URL + Constants.DATABASE_NAME;
 	private String username = Constants.MYSQL_USERNAME;
-	private String password = Constants.MYSQL_PASSWORD;
-
-	private static JDBCUtil util = null;// 静态成员变量，支持单态模式
+	private String password = Constants.MYSQL_PASSWORD;private static JDBCUtil util = null;// 静态成员变量，支持单态模式
 
 	private static Connection conn = null;
 	private PreparedStatement pstm = null;
@@ -47,7 +46,7 @@ public class JDBCUtil {
 	public void connectDB() throws SQLException {
 		conn = DriverManager.getConnection(strCon, username, password);
 		if (Constants.DEBUG_FLAG) {
-			System.out.println(conn != null ? "连接成功" : "连接失败");
+			Constants.showDebugLog(conn != null ? "连接成功" : "连接失败");
 		}
 	}
 
@@ -103,9 +102,13 @@ public class JDBCUtil {
 	 * @throws SQLException
 	 */
 
-	private void setPrepareStatementParams(String sql, Object[] params)
+	private void setPrepareStatementParams(String sql, Object[] params, boolean getKey)
 			throws SQLException {
-		pstm = conn.prepareStatement(sql);
+		if (getKey) {
+			pstm = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		} else {
+			pstm = conn.prepareStatement(sql);
+		}
 		if (params != null) {
 			for (int i = 0; i < params.length; i++) {
 				pstm.setObject(i + 1, params[i]);
@@ -126,7 +129,7 @@ public class JDBCUtil {
 	public ResultSet executeQuery(String sql, Object[] params)
 			throws SQLException { // 执行查询数据库接口
 
-		util.setPrepareStatementParams(sql, params); // 填充参数
+		util.setPrepareStatementParams(sql, params, false); // 填充参数
 		rs = pstm.executeQuery(); // 执行查询操作
 		return rs;
 	}
@@ -139,12 +142,21 @@ public class JDBCUtil {
 	 * @return
 	 * @throws SQLException
 	 */
-	public int executeUpdate(String sql, Object[] params) throws SQLException // 执行无返回数据的数据查询，返回值是被改变的书库的数据库项数
+	public int executeUpdate(String sql, Object[] params, boolean getKey) throws SQLException // 执行无返回数据的数据查询，返回值是被改变的书库的数据库项数
 	{
 		int result = -1;
-		util.setPrepareStatementParams(sql, params); // 填充参数
+		util.setPrepareStatementParams(sql, params, getKey); // 填充参数
 		pstm.executeUpdate(); // 执行更新
 		result = 1;
 		return result;
+	}
+	
+	public int getGeneratedKey() throws SQLException { //在添加完数据后获取被添加数据的自增ID
+		ResultSet rs = pstm.getGeneratedKeys();
+		if (rs.next()) {
+			int id = rs.getInt(1);
+			return id;
+		}
+		return -1;
 	}
 }
