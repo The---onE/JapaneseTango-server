@@ -1,9 +1,7 @@
 ﻿package servlet;
 
 import java.io.IOException;
-import java.io.Writer;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,9 +15,9 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import common.Constants;
+import dao.ITangoDao;
+import dao.impl.TangoDao;
 import entity.Tango;
-import util.JDBCUtil;
-import util.StrUtil;
 
 /**
  * Servlet implementation class ListTango
@@ -27,6 +25,8 @@ import util.StrUtil;
 @WebServlet("/ListTango")
 public class ListTango extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	ITangoDao tangoDao = new TangoDao();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -43,66 +43,38 @@ public class ListTango extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html"); // 设置文本形式和字符编码
 		response.setCharacterEncoding("UTF-8");
-		Writer out = response.getWriter();
+		
+		PrintWriter writer = response.getWriter();
 		JSONObject res = new JSONObject();
-
 		try {
-			JDBCUtil db = JDBCUtil.getInstance();
-			db.connectDB();
-			ResultSet rs = db.executeQuery(
-					"SELECT id, writing, pronunciation, tone, meaning, part_of_speech" + " FROM tango",
-					new Object[] {});
+			List<Tango> tangoList = tangoDao.selectAll();
+			if (tangoList != null && tangoList.size() > 0) {
+				res.put(Constants.RESPONSE_STATUS, Constants.STATUS_QUERY_SUCCESS);
+				res.put(Constants.RESPONSE_PROMPT, "获取成功");
+				JSONArray entityList = new JSONArray();
 
-			if (rs != null) {
-				if (rs.next()) {
-					res.put(Constants.RESPONSE_STATUS, Constants.STATUS_QUERY_SUCCESS);
-					res.put(Constants.RESPONSE_PROMPT, "获取成功");
-					JSONArray entityList = new JSONArray();
-					List<Tango> tangoList = new ArrayList<>();
-					do {
-						Tango t = new Tango(rs);
-						tangoList.add(t);
-					} while (rs.next());
-
-					for (Tango t : tangoList) {
-						String strings[] = new String[] { t.writing, // 0
-								t.pronunciation, // 1
-								t.meaning, // 2
-								String.valueOf(t.tone), // 3
-								t.partOfSpeech, // 4
-								t.image, // 5
-								t.voice, // 6
-								String.valueOf(t.score), // 7
-								String.valueOf(t.frequency), // 8
-								String.valueOf(t.addTime.getTime()), // 9
-								String.valueOf(t.lastTime.getTime()), // 10
-								t.flags, // 11
-								String.valueOf(t.delFlag), // 12
-								t.type // 13
-						};
-						String item = StrUtil.join(strings, ",");
-						entityList.put(item);
-					}
-					res.put(Constants.RESPONSE_ENTITIES, entityList);
-				} else {
-					res.put(Constants.RESPONSE_STATUS, Constants.STATUS_EXECUTE_SUCCESS);
-					res.put(Constants.RESPONSE_PROMPT, "暂无数据");
+				for (Tango t : tangoList) {
+					entityList.put(t.convertToCvs());
 				}
+				res.put(Constants.RESPONSE_ENTITIES, entityList);
+			} else {
+				res.put(Constants.RESPONSE_STATUS, Constants.STATUS_EXECUTE_SUCCESS);
+				res.put(Constants.RESPONSE_PROMPT, "暂无数据");
 			}
 
-			out.append(res.toString());
+			writer.append(res.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
 				res.put(Constants.RESPONSE_STATUS, 0);
 				res.put(Constants.RESPONSE_PROMPT, "获取失败");
-				out.append(res.toString());
+				writer.append(res.toString());
 			} catch (JSONException ex) {
 				ex.printStackTrace();
 			}
 		} finally {
-			out.flush();
-			out.close();
+			writer.flush();
+			writer.close();
 		}
 	}
 
