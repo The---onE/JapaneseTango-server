@@ -43,11 +43,18 @@ public class ListTango extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html"); // 设置文本形式和字符编码
 		response.setCharacterEncoding("UTF-8");
-		
+
 		PrintWriter writer = response.getWriter();
 		JSONObject res = new JSONObject();
 		try {
-			List<Tango> tangoList = tangoDao.selectAll();
+			String type = request.getParameter("type");
+
+			List<Tango> tangoList;
+			if (type != null && !type.equals("")) {
+				tangoList = tangoDao.selectByType(type);
+			} else {
+				tangoList = tangoDao.selectAll();
+			}
 			if (tangoList != null && tangoList.size() > 0) {
 				res.put(Constants.RESPONSE_STATUS, Constants.STATUS_QUERY_SUCCESS);
 				res.put(Constants.RESPONSE_PROMPT, "获取成功");
