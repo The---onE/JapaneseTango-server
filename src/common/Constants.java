@@ -47,8 +47,8 @@ public class Constants {
 				res.put(Constants.RESPONSE_STATUS, Constants.STATUS_QUERY_SUCCESS);
 				res.put(Constants.RESPONSE_PROMPT, "获取成功");
 				JSONArray entityList = new JSONArray();
-				for (Entity article : result) {
-					entityList.put(article.convertToJSON());
+				for (Entity item : result) {
+					entityList.put(item.convertToJSON());
 				}
 				res.put(Constants.RESPONSE_ENTITIES, entityList);
 			} else {

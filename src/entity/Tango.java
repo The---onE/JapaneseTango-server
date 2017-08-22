@@ -1,5 +1,6 @@
 ﻿package entity;
 
+import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -13,33 +14,33 @@ import util.StrUtil;
  * Created by The_onE on 2016/9/13.
  */
 public class Tango extends BaseEntity {
-    public long id = -1;
-    public String writing = "";
-    public String pronunciation = "";
-    public String meaning = "";
-    public int tone = -1;
-    public String partOfSpeech = "";
-    public String image = "";
-    public String voice = "";
-    public int score = 0;
-    public int frequency = 0;
-    public Date addTime = new Date(0);
-    public Date lastTime = new Date(0);
-    public String flags = "";
-    public int delFlag = 0;
-    public String type = "";
+	public long id = -1;
+	public String writing = "";
+	public String pronunciation = "";
+	public String meaning = "";
+	public int tone = -1;
+	public String partOfSpeech = "";
+	public String image = "";
+	public String voice = "";
+	public int score = 0;
+	public int frequency = 0;
+	public Date addTime = new Date(0);
+	public Date lastTime = new Date(0);
+	public String flags = "";
+	public int delFlag = 0;
+	public String type = "";
 
 	@Override
 	public BaseEntity convert(ResultSet rs) throws SQLException {
 		Tango t = new Tango();
-		
-    	t.id = rs.getInt("id");
-    	t.writing = rs.getString("writing");
-    	t.pronunciation = rs.getString("pronunciation");
-    	t.tone = rs.getInt("tone");
-    	t.meaning = rs.getString("meaning");
-    	t.partOfSpeech = rs.getString("part_of_speech");
-		
+
+		t.id = rs.getInt("id");
+		t.writing = rs.getString("writing");
+		t.pronunciation = rs.getString("pronunciation");
+		t.tone = rs.getInt("tone");
+		t.meaning = rs.getString("meaning");
+		t.partOfSpeech = rs.getString("part_of_speech");
+
 		return t;
 	}
 
@@ -54,15 +55,30 @@ public class Tango extends BaseEntity {
 	@Override
 	public JSONObject convertToJSON() throws JSONException {
 		JSONObject object = new JSONObject();
-		object.put("id", id);
-		object.put("writing", writing);
-		object.put("pronunciation", pronunciation);
-		object.put("tone", tone);
-		object.put("meaning", meaning);
-		object.put("partOfSpeech", partOfSpeech);
+		try {
+			// object.put("id", id);
+			// object.put("writing", writing);
+			// object.put("pronunciation", pronunciation);
+			// object.put("tone", tone);
+			// object.put("meaning", meaning);
+			// object.put("partOfSpeech", partOfSpeech);
+			Class<? extends Tango> c = this.getClass();
+			Field[] fs = c.getDeclaredFields();
+			for (Field f : fs) {
+				f.setAccessible(true);
+				String fieldName = f.getName();
+				Object o;
+				o = f.get(this);
+				if (o != null) {
+					object.put(fieldName, o);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return object;
 	}
-	
+
 	public String convertToCvs() {
 		String strings[] = new String[] { writing, // 0
 				pronunciation, // 1
