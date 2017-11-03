@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xmx.dao.TangoMapper">
+  <resultMap id="BaseResultMap" type="xmx.model.Tango">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="writing" jdbcType="VARCHAR" property="writing" />
+    <result column="pronunciation" jdbcType="VARCHAR" property="pronunciation" />
+    <result column="meaning" jdbcType="VARCHAR" property="meaning" />
+    <result column="tone" jdbcType="INTEGER" property="tone" />
+    <result column="part_of_speech" jdbcType="VARCHAR" property="partOfSpeech" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="voice" jdbcType="VARCHAR" property="voice" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="frequency" jdbcType="INTEGER" property="frequency" />
+    <result column="add_Time" jdbcType="INTEGER" property="addTime" />
+    <result column="last_time" jdbcType="INTEGER" property="lastTime" />
+    <result column="flags" jdbcType="VARCHAR" property="flags" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, writing, pronunciation, meaning, tone, part_of_speech, image, voice, score, frequency, 
+    add_Time, last_time, flags, del_flag, type
+  </sql>
+  <select id="selectByExample" parameterType="xmx.model.TangoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tango
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tango
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tango
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="xmx.model.TangoExample">
+    delete from tango
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="xmx.model.Tango">
+    insert into tango (id, writing, pronunciation, 
+      meaning, tone, part_of_speech, 
+      image, voice, score, 
+      frequency, add_Time, last_time, 
+      flags, del_flag, type
+      )
+    values (#{id,jdbcType=INTEGER}, #{writing,jdbcType=VARCHAR}, #{pronunciation,jdbcType=VARCHAR}, 
+      #{meaning,jdbcType=VARCHAR}, #{tone,jdbcType=INTEGER}, #{partOfSpeech,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{voice,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
+      #{frequency,jdbcType=INTEGER}, #{addTime,jdbcType=INTEGER}, #{lastTime,jdbcType=INTEGER}, 
+      #{flags,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="xmx.model.Tango">
+    insert into tango
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="writing != null">
+        writing,
+      </if>
+      <if test="pronunciation != null">
+        pronunciation,
+      </if>
+      <if test="meaning != null">
+        meaning,
+      </if>
+      <if test="tone != null">
+        tone,
+      </if>
+      <if test="partOfSpeech != null">
+        part_of_speech,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="voice != null">
+        voice,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="frequency != null">
+        frequency,
+      </if>
+      <if test="addTime != null">
+        add_Time,
+      </if>
+      <if test="lastTime != null">
+        last_time,
+      </if>
+      <if test="flags != null">
+        flags,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="writing != null">
+        #{writing,jdbcType=VARCHAR},
+      </if>
+      <if test="pronunciation != null">
+        #{pronunciation,jdbcType=VARCHAR},
+      </if>
+      <if test="meaning != null">
+        #{meaning,jdbcType=VARCHAR},
+      </if>
+      <if test="tone != null">
+        #{tone,jdbcType=INTEGER},
+      </if>
+      <if test="partOfSpeech != null">
+        #{partOfSpeech,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="voice != null">
+        #{voice,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="frequency != null">
+        #{frequency,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=INTEGER},
+      </if>
+      <if test="lastTime != null">
+        #{lastTime,jdbcType=INTEGER},
+      </if>
+      <if test="flags != null">
+        #{flags,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="xmx.model.TangoExample" resultType="java.lang.Long">
+    select count(*) from tango
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tango
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.writing != null">
+        writing = #{record.writing,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pronunciation != null">
+        pronunciation = #{record.pronunciation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meaning != null">
+        meaning = #{record.meaning,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tone != null">
+        tone = #{record.tone,jdbcType=INTEGER},
+      </if>
+      <if test="record.partOfSpeech != null">
+        part_of_speech = #{record.partOfSpeech,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null">
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.voice != null">
+        voice = #{record.voice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.score != null">
+        score = #{record.score,jdbcType=INTEGER},
+      </if>
+      <if test="record.frequency != null">
+        frequency = #{record.frequency,jdbcType=INTEGER},
+      </if>
+      <if test="record.addTime != null">
+        add_Time = #{record.addTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastTime != null">
+        last_time = #{record.lastTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.flags != null">
+        flags = #{record.flags,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tango
+    set id = #{record.id,jdbcType=INTEGER},
+      writing = #{record.writing,jdbcType=VARCHAR},
+      pronunciation = #{record.pronunciation,jdbcType=VARCHAR},
+      meaning = #{record.meaning,jdbcType=VARCHAR},
+      tone = #{record.tone,jdbcType=INTEGER},
+      part_of_speech = #{record.partOfSpeech,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      voice = #{record.voice,jdbcType=VARCHAR},
+      score = #{record.score,jdbcType=INTEGER},
+      frequency = #{record.frequency,jdbcType=INTEGER},
+      add_Time = #{record.addTime,jdbcType=INTEGER},
+      last_time = #{record.lastTime,jdbcType=INTEGER},
+      flags = #{record.flags,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="xmx.model.Tango">
+    update tango
+    <set>
+      <if test="writing != null">
+        writing = #{writing,jdbcType=VARCHAR},
+      </if>
+      <if test="pronunciation != null">
+        pronunciation = #{pronunciation,jdbcType=VARCHAR},
+      </if>
+      <if test="meaning != null">
+        meaning = #{meaning,jdbcType=VARCHAR},
+      </if>
+      <if test="tone != null">
+        tone = #{tone,jdbcType=INTEGER},
+      </if>
+      <if test="partOfSpeech != null">
+        part_of_speech = #{partOfSpeech,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="voice != null">
+        voice = #{voice,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="frequency != null">
+        frequency = #{frequency,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        add_Time = #{addTime,jdbcType=INTEGER},
+      </if>
+      <if test="lastTime != null">
+        last_time = #{lastTime,jdbcType=INTEGER},
+      </if>
+      <if test="flags != null">
+        flags = #{flags,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xmx.model.Tango">
+    update tango
+    set writing = #{writing,jdbcType=VARCHAR},
+      pronunciation = #{pronunciation,jdbcType=VARCHAR},
+      meaning = #{meaning,jdbcType=VARCHAR},
+      tone = #{tone,jdbcType=INTEGER},
+      part_of_speech = #{partOfSpeech,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      voice = #{voice,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      frequency = #{frequency,jdbcType=INTEGER},
+      add_Time = #{addTime,jdbcType=INTEGER},
+      last_time = #{lastTime,jdbcType=INTEGER},
+      flags = #{flags,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="xmx.model.TangoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tango
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
