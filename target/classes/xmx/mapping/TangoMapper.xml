@@ -12,8 +12,8 @@
     <result column="voice" jdbcType="VARCHAR" property="voice" />
     <result column="score" jdbcType="INTEGER" property="score" />
     <result column="frequency" jdbcType="INTEGER" property="frequency" />
-    <result column="add_Time" jdbcType="INTEGER" property="addTime" />
-    <result column="last_time" jdbcType="INTEGER" property="lastTime" />
+    <result column="add_Time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="last_time" jdbcType="TIMESTAMP" property="lastTime" />
     <result column="flags" jdbcType="VARCHAR" property="flags" />
     <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
     <result column="type" jdbcType="VARCHAR" property="type" />
@@ -121,7 +121,7 @@
     values (#{id,jdbcType=INTEGER}, #{writing,jdbcType=VARCHAR}, #{pronunciation,jdbcType=VARCHAR}, 
       #{meaning,jdbcType=VARCHAR}, #{tone,jdbcType=INTEGER}, #{partOfSpeech,jdbcType=VARCHAR}, 
       #{image,jdbcType=VARCHAR}, #{voice,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
-      #{frequency,jdbcType=INTEGER}, #{addTime,jdbcType=INTEGER}, #{lastTime,jdbcType=INTEGER}, 
+      #{frequency,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP}, #{lastTime,jdbcType=TIMESTAMP}, 
       #{flags,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}
       )
   </insert>
@@ -206,10 +206,10 @@
         #{frequency,jdbcType=INTEGER},
       </if>
       <if test="addTime != null">
-        #{addTime,jdbcType=INTEGER},
+        #{addTime,jdbcType=TIMESTAMP},
       </if>
       <if test="lastTime != null">
-        #{lastTime,jdbcType=INTEGER},
+        #{lastTime,jdbcType=TIMESTAMP},
       </if>
       <if test="flags != null">
         #{flags,jdbcType=VARCHAR},
@@ -262,10 +262,10 @@
         frequency = #{record.frequency,jdbcType=INTEGER},
       </if>
       <if test="record.addTime != null">
-        add_Time = #{record.addTime,jdbcType=INTEGER},
+        add_Time = #{record.addTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.lastTime != null">
-        last_time = #{record.lastTime,jdbcType=INTEGER},
+        last_time = #{record.lastTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.flags != null">
         flags = #{record.flags,jdbcType=VARCHAR},
@@ -293,8 +293,8 @@
       voice = #{record.voice,jdbcType=VARCHAR},
       score = #{record.score,jdbcType=INTEGER},
       frequency = #{record.frequency,jdbcType=INTEGER},
-      add_Time = #{record.addTime,jdbcType=INTEGER},
-      last_time = #{record.lastTime,jdbcType=INTEGER},
+      add_Time = #{record.addTime,jdbcType=TIMESTAMP},
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP},
       flags = #{record.flags,jdbcType=VARCHAR},
       del_flag = #{record.delFlag,jdbcType=INTEGER},
       type = #{record.type,jdbcType=VARCHAR}
@@ -333,10 +333,10 @@
         frequency = #{frequency,jdbcType=INTEGER},
       </if>
       <if test="addTime != null">
-        add_Time = #{addTime,jdbcType=INTEGER},
+        add_Time = #{addTime,jdbcType=TIMESTAMP},
       </if>
       <if test="lastTime != null">
-        last_time = #{lastTime,jdbcType=INTEGER},
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
       </if>
       <if test="flags != null">
         flags = #{flags,jdbcType=VARCHAR},
@@ -361,8 +361,8 @@
       voice = #{voice,jdbcType=VARCHAR},
       score = #{score,jdbcType=INTEGER},
       frequency = #{frequency,jdbcType=INTEGER},
-      add_Time = #{addTime,jdbcType=INTEGER},
-      last_time = #{lastTime,jdbcType=INTEGER},
+      add_Time = #{addTime,jdbcType=TIMESTAMP},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
       flags = #{flags,jdbcType=VARCHAR},
       del_flag = #{delFlag,jdbcType=INTEGER},
       type = #{type,jdbcType=VARCHAR}

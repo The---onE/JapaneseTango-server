@@ -29,7 +29,7 @@
 				return;
 			}
 			$.ajax({
-				url: 'Admin/login',
+				url: 'Admin/Login',
 				type: 'post',
 				data: {
 					name: name,

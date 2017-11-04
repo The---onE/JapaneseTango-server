@@ -1,6 +1,7 @@
 package xmx.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TangoExample {
@@ -774,52 +775,52 @@ public class TangoExample {
             return (Criteria) this;
         }
 
-        public Criteria andAddTimeEqualTo(Integer value) {
+        public Criteria andAddTimeEqualTo(Date value) {
             addCriterion("add_Time =", value, "addTime");
             return (Criteria) this;
         }
 
-        public Criteria andAddTimeNotEqualTo(Integer value) {
+        public Criteria andAddTimeNotEqualTo(Date value) {
             addCriterion("add_Time <>", value, "addTime");
             return (Criteria) this;
         }
 
-        public Criteria andAddTimeGreaterThan(Integer value) {
+        public Criteria andAddTimeGreaterThan(Date value) {
             addCriterion("add_Time >", value, "addTime");
             return (Criteria) this;
         }
 
-        public Criteria andAddTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andAddTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("add_Time >=", value, "addTime");
             return (Criteria) this;
         }
 
-        public Criteria andAddTimeLessThan(Integer value) {
+        public Criteria andAddTimeLessThan(Date value) {
             addCriterion("add_Time <", value, "addTime");
             return (Criteria) this;
         }
 
-        public Criteria andAddTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andAddTimeLessThanOrEqualTo(Date value) {
             addCriterion("add_Time <=", value, "addTime");
             return (Criteria) this;
         }
 
-        public Criteria andAddTimeIn(List<Integer> values) {
+        public Criteria andAddTimeIn(List<Date> values) {
             addCriterion("add_Time in", values, "addTime");
             return (Criteria) this;
         }
 
-        public Criteria andAddTimeNotIn(List<Integer> values) {
+        public Criteria andAddTimeNotIn(List<Date> values) {
             addCriterion("add_Time not in", values, "addTime");
             return (Criteria) this;
         }
 
-        public Criteria andAddTimeBetween(Integer value1, Integer value2) {
+        public Criteria andAddTimeBetween(Date value1, Date value2) {
             addCriterion("add_Time between", value1, value2, "addTime");
             return (Criteria) this;
         }
 
-        public Criteria andAddTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andAddTimeNotBetween(Date value1, Date value2) {
             addCriterion("add_Time not between", value1, value2, "addTime");
             return (Criteria) this;
         }
@@ -834,52 +835,52 @@ public class TangoExample {
             return (Criteria) this;
         }
 
-        public Criteria andLastTimeEqualTo(Integer value) {
+        public Criteria andLastTimeEqualTo(Date value) {
             addCriterion("last_time =", value, "lastTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastTimeNotEqualTo(Integer value) {
+        public Criteria andLastTimeNotEqualTo(Date value) {
             addCriterion("last_time <>", value, "lastTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastTimeGreaterThan(Integer value) {
+        public Criteria andLastTimeGreaterThan(Date value) {
             addCriterion("last_time >", value, "lastTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andLastTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("last_time >=", value, "lastTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastTimeLessThan(Integer value) {
+        public Criteria andLastTimeLessThan(Date value) {
             addCriterion("last_time <", value, "lastTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andLastTimeLessThanOrEqualTo(Date value) {
             addCriterion("last_time <=", value, "lastTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastTimeIn(List<Integer> values) {
+        public Criteria andLastTimeIn(List<Date> values) {
             addCriterion("last_time in", values, "lastTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastTimeNotIn(List<Integer> values) {
+        public Criteria andLastTimeNotIn(List<Date> values) {
             addCriterion("last_time not in", values, "lastTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastTimeBetween(Integer value1, Integer value2) {
+        public Criteria andLastTimeBetween(Date value1, Date value2) {
             addCriterion("last_time between", value1, value2, "lastTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andLastTimeNotBetween(Date value1, Date value2) {
             addCriterion("last_time not between", value1, value2, "lastTime");
             return (Criteria) this;
         }

@@ -13,7 +13,7 @@ import xmx.service.ITangoService;
 import xmx.util.TinyTangoListResult;
 
 /**
- * 后台控制器
+ * 单语接口控制器
  * 
  * @author The_onE
  *

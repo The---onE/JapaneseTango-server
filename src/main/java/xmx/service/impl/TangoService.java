@@ -62,4 +62,9 @@ public class TangoService implements ITangoService {
 		return tinyTangoList;
 	}
 
+	@Override
+	public int addTango(Tango tango) {
+		return tangoDao.insertSelective(tango);
+	}
+
 }

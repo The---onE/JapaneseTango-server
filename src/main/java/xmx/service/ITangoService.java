@@ -2,6 +2,7 @@ package xmx.service;
 
 import java.util.List;
 
+import xmx.model.Tango;
 import xmx.model.TinyTango;
 
 /**
@@ -14,4 +15,6 @@ public interface ITangoService {
 	List<TinyTango> searchTinyTango();
 	
 	List<TinyTango> searchTinyTango(String type);
+	
+	int addTango(Tango tango);
 }

@@ -14,14 +14,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="shortcut icon" href="image/favicon.ico">
 <script src="js/jquery-2.2.4.min.js" type="text/javascript"></script>
-<title>首页</title>
+<title>后台主页</title>
 <script type="text/javascript">
 	$(function() {
-		window.location.href = 'Admin/index';
+		
 	});
 </script>
 </head>
 <body>
-	<div>正在跳转至首页……</div>
+	<div>
+		<a href="Admin/addTango">添加</a>
+	</div>
 </body>
 </html>

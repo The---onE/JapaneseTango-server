@@ -1,5 +1,7 @@
 package xmx.model;
 
+import java.util.Date;
+
 public class Tango {
     private Integer id;
 
@@ -21,9 +23,9 @@ public class Tango {
 
     private Integer frequency;
 
-    private Integer addTime;
+    private Date addTime;
 
-    private Integer lastTime;
+    private Date lastTime;
 
     private String flags;
 
@@ -111,19 +113,19 @@ public class Tango {
         this.frequency = frequency;
     }
 
-    public Integer getAddTime() {
+    public Date getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(Integer addTime) {
+    public void setAddTime(Date addTime) {
         this.addTime = addTime;
     }
 
-    public Integer getLastTime() {
+    public Date getLastTime() {
         return lastTime;
     }
 
-    public void setLastTime(Integer lastTime) {
+    public void setLastTime(Date lastTime) {
         this.lastTime = lastTime;
     }
 
