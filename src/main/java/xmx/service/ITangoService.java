@@ -16,5 +16,9 @@ public interface ITangoService {
 	
 	List<TinyTango> searchTinyTango(String type);
 	
+	List<Tango> searchTango();
+	
+	List<Tango> searchTango(String type);
+	
 	int addTango(Tango tango);
 }

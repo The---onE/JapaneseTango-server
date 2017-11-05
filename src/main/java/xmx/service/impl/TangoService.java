@@ -63,6 +63,19 @@ public class TangoService implements ITangoService {
 	}
 
 	@Override
+	public List<Tango> searchTango() {
+		TangoExample example = new TangoExample();
+		return tangoDao.selectByExample(example);
+	}
+
+	@Override
+	public List<Tango> searchTango(String type) {
+		TangoExample example = new TangoExample();
+		example.or().andTypeEqualTo(type);
+		return tangoDao.selectByExample(example);
+	}
+
+	@Override
 	public int addTango(Tango tango) {
 		return tangoDao.insertSelective(tango);
 	}

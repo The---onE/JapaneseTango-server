@@ -1,11 +1,14 @@
 package xmx.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import xmx.model.Tango;
 import xmx.service.ITangoService;
@@ -78,16 +81,20 @@ public class AdminController {
 	 * @return 后台主页界面
 	 */
 	@RequestMapping(value = "/main", produces = "text/html;charset=UTF-8")
-	public String main() {
-		return "admin/main";
+	public ModelAndView main() {
+		ModelAndView mav = new ModelAndView("admin/main");
+		List<Tango> list = tangoService.searchTango();
+		mav.addObject("list", list);
+		
+		return mav;
 	}
 
 	/**
-	 * 后台主页
+	 * 添加单语页
 	 * 
 	 * @param session
 	 *            当前Session
-	 * @return 已登录返回后台主页界面，未登录返回登录界面
+	 * @return 添加单语界面
 	 */
 	@RequestMapping(value = "/addTango", produces = "text/html;charset=UTF-8")
 	public String addTango() {

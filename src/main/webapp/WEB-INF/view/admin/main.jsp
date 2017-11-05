@@ -25,5 +25,29 @@
 	<div>
 		<a href="Admin/addTango">添加</a>
 	</div>
+	<div>
+		<table>
+			<tr>
+				<td>ID</td>
+				<td>写法</td>
+				<td>发音</td>
+				<td>解释</td>
+				<td>音调</td>
+				<td>词性</td>
+				<td>类别</td>
+			</tr>
+			<c:forEach var="item" items="${list}">
+				<tr>
+					<td>${item.id}</td>
+					<td>${item.writing}</td>
+					<td>${item.pronunciation}</td>
+					<td>${item.meaning}</td>
+					<td>${item.tone}</td>
+					<td>${item.partOfSpeech}</td>
+					<td>${item.type}</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
 </body>
 </html>
