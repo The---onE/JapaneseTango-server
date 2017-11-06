@@ -21,4 +21,6 @@ public interface ITangoService {
 	List<Tango> searchTango(String type);
 	
 	int addTango(Tango tango);
+	
+	int deleteTango(int id);
 }

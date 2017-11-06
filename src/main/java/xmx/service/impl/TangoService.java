@@ -80,4 +80,9 @@ public class TangoService implements ITangoService {
 		return tangoDao.insertSelective(tango);
 	}
 
+	@Override
+	public int deleteTango(int id) {
+		return tangoDao.deleteByPrimaryKey(id);
+	}
+
 }

@@ -78,6 +78,7 @@ public class AdminController {
 
 	/**
 	 * 后台主页
+	 * 
 	 * @return 后台主页界面
 	 */
 	@RequestMapping(value = "/main", produces = "text/html;charset=UTF-8")
@@ -85,7 +86,7 @@ public class AdminController {
 		ModelAndView mav = new ModelAndView("admin/main");
 		List<Tango> list = tangoService.searchTango();
 		mav.addObject("list", list);
-		
+
 		return mav;
 	}
 
@@ -102,14 +103,21 @@ public class AdminController {
 	}
 
 	/**
+	 * 添加单语
 	 * 
 	 * @param writing
+	 *            写法
 	 * @param pronunciation
+	 *            发音
 	 * @param meaning
+	 *            解释
 	 * @param tone
+	 *            音调
 	 * @param partOfSpeech
+	 *            词性
 	 * @param type
-	 * @return
+	 *            类型
+	 * @return 添加结果
 	 */
 	@RequestMapping(value = "/AddTango", produces = "text/html;charset=UTF-8")
 	@ResponseBody
@@ -136,6 +144,32 @@ public class AdminController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return result.setStatus(-1).setPrompt("添加失败").toJson();
+		}
+	}
+
+	/**
+	 * 删除单语
+	 * 
+	 * @param id
+	 *            ID
+	 * @return 删除结果
+	 */
+	@RequestMapping(value = "/DeleteTango", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String deleteTango(int id) {
+		PromptResult result = new PromptResult();
+		try {
+			int re = tangoService.deleteTango(id);
+			if (re > 0) {
+				result.setStatus(1).setPrompt("删除成功");
+			} else {
+				result.setStatus(-2).setPrompt("删除失败");
+			}
+
+			return result.toJson();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result.setStatus(-1).setPrompt("删除失败").toJson();
 		}
 	}
 }

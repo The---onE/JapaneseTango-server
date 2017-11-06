@@ -19,6 +19,30 @@
 	$(function() {
 		
 	});
+	
+	function deleteTango(id) {
+		if (confirm('确定要删除吗？')) {
+			$.ajax({
+				url : 'Admin/DeleteTango',
+				type : 'post',
+				data : {
+					id: id
+				},
+				dataType : 'json',
+				success : function(result) {
+					if (result.status == 1) {
+						alert(result.prompt);
+						window.location.reload();
+					} else {
+						alert(result.prompt);
+					}
+				},
+				fail : function(result) {
+					alert(result);
+				}
+			});
+		}
+	}
 </script>
 </head>
 <body>
@@ -28,7 +52,7 @@
 	<div>
 		<table>
 			<tr>
-				<td>ID</td>
+				<td>序号</td>
 				<td>写法</td>
 				<td>发音</td>
 				<td>解释</td>
@@ -36,15 +60,16 @@
 				<td>词性</td>
 				<td>类别</td>
 			</tr>
-			<c:forEach var="item" items="${list}">
+			<c:forEach var="item" items="${list}" varStatus="status">
 				<tr>
-					<td>${item.id}</td>
+					<td>${status.count}</td>
 					<td>${item.writing}</td>
 					<td>${item.pronunciation}</td>
 					<td>${item.meaning}</td>
 					<td>${item.tone}</td>
 					<td>${item.partOfSpeech}</td>
 					<td>${item.type}</td>
+					<td><a href="javascript:deleteTango(${item.id})">删除</a></td>
 				</tr>
 			</c:forEach>
 		</table>
